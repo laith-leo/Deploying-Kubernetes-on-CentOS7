@@ -63,7 +63,7 @@ kubectl apply -f https://docs.projectcalico.org/v3.10/manifests/calico.yaml
 
 
 #setup kubectl bash completion
-kubectl completion bash >/etc/ibash_completion.d/kubectl && bash
+kubectl completion bash >/etc/bash_completion.d/kubectl && bash
 
 
 
