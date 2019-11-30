@@ -7,16 +7,16 @@
 
 
 #Update the system packages:
-yum update -y
+yum update -y && yum install -y git wget curl vim bind-utils screen nc bash-completion net-tools zsh
 
 #Disable SWAP:
 sed -i.bak -r 's/(.+ swap .+)/#\1/' /etc/fstab && swapoff -a
 
 # Disable SELinux, setenforce 0 &&
-setenforce 0 && sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config
+setenforce 0 && sed -i 's/enforcing/disabled/vim bind-utils screen nc bash-completion net-toolsg' /etc/selinux/config /etc/selinux/config
 
 
-#Set the firewall to allow the needed ports:
+#Set the firewall to allow the needed ports:vim bind-utils screen nc bash-completion net-tools
 yum install -y firewalld && systemctl enable firewalld && systemctl start firewalld
 
   firewall-cmd --permanent --add-port=6443/tcp
@@ -34,7 +34,7 @@ echo "net.bridge.bridge-nf-call-iptables = 1" >> /etc/sysctl.conf sysctl --syste
 cat <<EOF > /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
-baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetvim bind-utils screen nc bash-completion net-toolsvim bind-utils screen nc bash-completion net-toolses-el7-x86_64
 enabled=1
 gpgcheck=1
 repo_gpgcheck=1
