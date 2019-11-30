@@ -41,8 +41,6 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
        https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF
 
-#Installing Calico network plugin
-kubectl apply -f https://docs.projectcalico.org/v3.10/manifests/calico.yaml
 
 #Enabling Docker repo on the system
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
@@ -54,6 +52,9 @@ systemctl restart docker && systemctl enable docker &&  systemctl restart kubele
 
 #Bootstrap the cluster
 kubeadm init --pod-network-cidr=192.168.0.0/16
+
+#Installing Calico network plugin
+kubectl apply -f https://docs.projectcalico.org/v3.10/manifests/calico.yaml
 
 #Setting K8s config for the current user
 mkdir -p $HOME/.kube
@@ -68,4 +69,4 @@ kubectl completion bash >/etc/bash_completion.d/kubectl && bash
 #Testing out the things!
 
 
-kubectl get pods --all-namespacesbaseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+kubectl get pods --all-namespaces
