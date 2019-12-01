@@ -52,19 +52,21 @@ systemctl restart docker && systemctl enable docker &&  systemctl restart kubele
 systemctl enable kubelet.service
 #Bootstrap the cluster
 kubeadm init --pod-network-cidr=192.168.0.0/16
+clear
 
 #Installing Calico network plugin
 kubectl apply -f https://docs.projectcalico.org/v3.10/manifests/calico.yaml
 
 #Setting K8s config for the current user
-mkdir -p $HOME/.kube
-cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-chown $(id -u):$(id -g) $HOME/.kube/config
-
+if  [[ ! -f $HOME/.kube/config ]]; then
+  mkdir -p $HOME/.kube && cp -i /etc/kubernetes/admin.conf $HOME/.kube/config && chown $(id -u):$(id -g) $HOME/.kube/config
+else
+  clear
+fi 
 #setup kubectl bash completion
-kubectl completion bash >/etc/bash_completion.d/kubectl && bash
+#kubectl completion bash >/etc/bash_completion.d/kubectl && bash
 
-
+clear 
 
 #Testing out the things!
 
