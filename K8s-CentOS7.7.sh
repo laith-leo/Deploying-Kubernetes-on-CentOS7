@@ -23,11 +23,11 @@ echo 'br_netfilter' > /etc/modules-load.d/netfilter.conf
   firewall-cmd --permanent --add-port=10255/tcp
   firewall-cmd --reload
 
-echo 'br_netfilter' > /e
+
 echo 'br_netfilter' > /etc/modules-load.d/netfilter.conf
-echo "net.bridge.bridge-nf-call-iptables = 1" >> /etc/sysctl.conf sysctl --system
-tc/modules-load.d/netfilter.conf
-echo "net.bridge.bridge-nf-call-iptables = 1" >> /etc/sysctl.conf sysctl --system
+echo "net.bridge.bridge-nf-call-iptables = 1" >> /etc/sysctl.conf 
+echo 1 > /proc/sys/net/ipv4/ip_forward
+sysctl --system
 
 #Install Kubernetes repo into the system
 cat <<EOF > /etc/yum.repos.d/kubernetes.repo
@@ -49,7 +49,7 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 yum install -y yum-utils device-mapper-persistent-data lvm2 kubeadm docker-ce docker-ce-cli containerd.io yum-plugin-versionlock yum-versionlock bash-completion
 yum versionlock add docker-ce kubelet kubeadm docker-ce-cli
 systemctl restart docker && systemctl enable docker &&  systemctl restart kubelet && systemctl enable kubelet
-
+systemctl enable kubelet.service
 #Bootstrap the cluster
 kubeadm init --pod-network-cidr=192.168.0.0/16
 
