@@ -69,6 +69,4 @@ fi
 clear 
 
 #Testing out the things!
-
-
 kubectl get pods --all-namespaces
