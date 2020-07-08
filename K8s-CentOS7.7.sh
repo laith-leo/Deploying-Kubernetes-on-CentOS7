@@ -8,7 +8,7 @@
 
 
 #Update the system packages:
-yum update -y && yum install -y git wget curl vim bind-utils screen nc bash-compshletion net-tools zsh yum-utils
+yum update -y && yum install -y git wget curl vim bind-utils screen nc net-tools zsh yum-utils
 
 #Disable SWAP:
 sed -i.bak -r 's/(.+ swap .+)/#\1/' /etc/fstab && swapoff -a
